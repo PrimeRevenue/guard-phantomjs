@@ -16,20 +16,25 @@ module Guard
       UI.info 'Guard::PhantomJS is running!'
     end
 
-    def run_on_change(paths)
+    def run_on_changes(paths)
       return if paths.empty?
 
-      cmd = "phantomjs #{@options[:runner]} #{@options[:server]}"
+      test = @options.has_key?(:file) ? @options[:file] : @options[:server]
+      cmd = "phantomjs #{@options[:runner]} #{test}"
+
       result = %x[#{cmd}]
 
-      notify(result, result =~ /0 failures/ ? :success : :failed)
+      success_pattern = @options[:qunit] ? /Failed: 0/ : /0 failures/
+      notify(result, result =~ success_pattern ? :success : :failed)
     end
 
 
     private
 
     def notify(message, image)
-      Notifier.notify(message, :title => 'Jasmine results', :image => image)
+      framework = @options[:qunit] ? "QUnit" : "Jasmine"
+      Notifier.notify(message, :title => "#{framework} results",
+        :image => image)
     end
 
   end

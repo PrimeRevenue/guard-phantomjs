@@ -14,10 +14,10 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "guard-phantomjs"
 
-  s.add_dependency "guard", ">= 0.3"
+  s.add_dependency "guard", ">= 1.2.1"
 
-  s.add_development_dependency "bundler", "~> 1.0.0"
-  s.add_development_dependency "rspec", "~> 2.3.0"
+  s.add_development_dependency "bundler", "~> 1.1.4"
+  s.add_development_dependency "rspec", "~> 2.10.0"
   s.add_development_dependency "guard-rspec"
 
   s.files         = `git ls-files`.split("\n")
