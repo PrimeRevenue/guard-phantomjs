@@ -26,6 +26,7 @@ module Guard
 
       success_pattern = @options[:qunit] ? /Failed: 0/ : /0 failures/
       notify(result, result =~ success_pattern ? :success : :failed)
+      puts result unless result =~ success_pattern
     end
 
 
